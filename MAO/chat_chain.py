@@ -11,7 +11,7 @@ from camel.configs import ChatGPTConfig
 from camel.typing import TaskType, ModelType
 from MAO.chat_env import ChatEnv, ChatEnvConfig 
 from MAO.statistics import get_info
-from camel.web_spider import modal_trans
+# from camel.web_spider import modal_trans
 from MAO.utils import log_and_print_online, now
 
 
@@ -150,7 +150,6 @@ class ChatChain:
             compose_phase_class = getattr(self.compose_phase_module, phase)
             if not compose_phase_class:
                 raise RuntimeError(f"Phase '{phase}' is not yet implemented in MAO.compose_phase")
-            print("output一下!="+phase+str(self.chat_env.env_dict['continue_sign_review'])+str(self.chat_env.env_dict['continue_sign_test']))
             if (phase=='Review' and self.chat_env.env_dict['continue_sign_review'] == "0") or (phase=='Test' and self.chat_env.env_dict['continue_sign_test'] == "0"):
                 pass
             else:   
@@ -211,6 +210,8 @@ class ChatChain:
                     print("{} Removed.".format(file_path))
 
         software_path = os.path.join(directory, "_".join([self.project_name, self.org_name, self.start_time]))
+        # print("root=",root)
+        # print("path!=",software_path)
         self.chat_env.set_directory(software_path)
 
         #upload the past memory
@@ -246,8 +247,8 @@ class ChatChain:
             self.chat_env.env_dict['task_prompt'] = self.self_task_improve(self.task_prompt_raw)
         else:
             self.chat_env.env_dict['task_prompt'] = self.task_prompt_raw
-        if(check_bool(self.web_spider)):
-            self.chat_env.env_dict['task_description'] = modal_trans(self.task_prompt_raw)
+        # if(check_bool(self.web_spider)):
+        #     self.chat_env.env_dict['task_description'] = modal_trans(self.task_prompt_raw)
 
     def post_processing(self):  
         """
@@ -255,20 +256,13 @@ class ChatChain:
         Returns: None
 
         """
-
+        
         filepath = os.path.dirname(__file__)
         root = os.path.dirname(filepath)
         directory = os.path.join(root, "WareHouse")
         software_path = os.path.join(directory, "_".join([self.project_name, self.org_name, self.start_time]))
-        file = open(software_path + "/process.txt", "w")
-        file.write(self.chat_env.env_dict['reviewed_process_text'])
-        file.close() 
-
-
-        self.chat_env.write_meta()
-        filepath = os.path.dirname(__file__)
-        root = os.path.dirname(filepath)
-        
+        with open(os.path.join(software_path, "process.txt"), "w") as f:
+            f.write(self.chat_env.env_dict['reviewed_process_text'])        
 
         post_info = "**[Post Info]**\n\n"
         now_time = now()

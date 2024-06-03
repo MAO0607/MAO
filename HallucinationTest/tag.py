@@ -1,10 +1,10 @@
 class Tag:
     def __init__(self,spaces,parentheses,content,condition,row,idnum):
-        self.spaces=spaces  #空几格
-        self.parentheses=parentheses  #左右括号
-        self.content=content  #标签内容
-        self.condition=condition  #条件
-        self.row=row #第几行
+        self.spaces=spaces  
+        self.parentheses=parentheses  
+        self.content=content  
+        self.condition=condition  
+        self.row=row 
         self.idnum=idnum
     def getSpaces(self):
         return self.spaces

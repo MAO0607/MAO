@@ -134,8 +134,8 @@ class RolePlaying:
 
         self.task_prompt = task_prompt
 
-        chatdev_prompt_template = "ChatDev is a process design company driven by multiple intelligent agents, such as process design experts, process design assistants, etc., with a multi-agent organizational structure, the mission is to design logical and error-free processes."
-
+        # chatdev_prompt_template = "ChatDev is a process design company driven by multiple intelligent agents, such as process design experts, process design assistants, etc., with a multi-agent organizational structure, the mission is to design logical and error-free processes."
+        chatdev_prompt_template =''
         sys_msg_meta_dicts = [dict(chatdev_prompt=chatdev_prompt_template, task=task_prompt)] * 2
         if (extend_sys_msg_meta_dicts is None and self.task_type in [TaskType.AI_SOCIETY, TaskType.MISALIGNMENT,
                                                                      TaskType.CHATDEV]):

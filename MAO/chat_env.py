@@ -85,7 +85,7 @@ The exclusive gateway is represented as follows:
   </branch>
 </exclusiveGateway>
 The parallel gateway is represented as follows:
-<parallelGateway>
+<parallelGateway id=''>
   <branch id=''>
     <activity role='' action='' objects='' id=''/>
   </branch>
@@ -93,6 +93,7 @@ The parallel gateway is represented as follows:
     <activity role='' action='' objects='' id=''/>
   </branch>
 </parallelGateway>
+The inclusive gateway is represented as follows:
 <inclusiveGateway id=''>
   <branch condition='' id=''>
     <activity role='' action='' objects='' id=''/>
